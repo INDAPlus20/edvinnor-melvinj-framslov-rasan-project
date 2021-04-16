@@ -4,4 +4,4 @@ Introducing a multiplayer strategic board game where you struggle to be the firs
 
 Will you have the strength to complete this near impossible mission littered with random prosam essays and unreliable classmates, will you be the player with enough vigour, discipline, work ethic and lack of need for human interaction to be the first to graduate. 
 
-There is only one way to find out, enter the campus. 
+There is only one way to find out, enter the campus! 
