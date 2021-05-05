@@ -31,8 +31,9 @@ public class CardInteraction : MonoBehaviour
         foreach (var p in players)
         {
             if (p.turn && p.card != null){
-                GDM.setStamin(p.id, GDM.getStamina() - card.staminaCost)
-                GDM.setHP(p.id, GDM.getHP() - card.hpGain)
+                GDM.setStamin(p.id, GDM.getStamina() - card.staminaCost);
+                GDM.setHP(p.id, GDM.getHP() - card.hpGain);
+                p.card = null;
             }
         }
     }
