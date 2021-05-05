@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     FrontEnd FE;
 
     // Assignements
-    ArrayList assignments;
-    ArrayList failedAssignments;
+    List<Card> assignments;
+    List<Card> failedAssignments;
     Card assignment;
     int successRate;
 
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     {   
         // Returns a deep copy of all assignments
         assignments = GDM.getAssignments();
-        failedAssignments = new ArrayList<Card>();
+        failedAssignments = new List<Card>();
 
         // Stats
         int stamina = 100;
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         addHP(5);
 
         // Roll for pass or fail
-        if (successRate > Range(0, 100)) {
+        if (successRate > Random.Range(0, 100)) {
             if (assignements.contains(assignment)) {
                 assignements.remove(assignment);
             } else {
@@ -133,5 +133,7 @@ public class Player : MonoBehaviour
                 faliedAssignements.add(assignment);
             }
         }
+
+        FE.endTurn();
     }
 }
