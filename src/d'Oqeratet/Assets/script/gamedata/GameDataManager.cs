@@ -31,15 +31,9 @@ struct Board
         this.ps = tempPlayers;
     }
 }
-/*
-struct TempExamCard {
-    public int staminaCost { get; };
-    public int hpBenefit { get; };
-}
-*/
+
 public class GameDataManager : MonoBehaviour
 {
-    
 
     private Board board;
     
@@ -53,15 +47,23 @@ public class GameDataManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("We are alive");
+
     }
 
-    void setHp(int playerindex, int hp) {
+    public void playerSetHp(int playerindex, int hp) {
         board.ps[playerindex].hp = hp;
     }
 
-    void setStamina(int playerindex, int stamina) {
+    public void playerSetStamina(int playerindex, int stamina) {
         board.ps[playerindex].stamina = stamina;
+    }
+
+    public int playerGetHp(int playerindex) {
+        return board.ps[playerindex].hp;
+    }
+
+    public int playerGetStamina(int playerindex) {
+        return board.ps[playerindex].stamina;
     }
 
 }
