@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private int staminaCost {get;}
-    private int hpGain {get;}
+    public int staminaCost {get;}
+    public int hpGain {get;}
 
     public Card(bool rand = true){
         if (rand){

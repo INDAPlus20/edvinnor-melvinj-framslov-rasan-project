@@ -9,6 +9,8 @@ struct Board
 
     public int activePlayerIndex;
 
+    public List<Card> Assignments;
+
     public Board(int numPlayers, int hpTarget)
     {
         Debug.Log("Creating Board Struct");
@@ -23,21 +25,14 @@ struct Board
         this.activePlayerIndex = 0;
 
         int hpSum = 0;
-        assignments = new List<Card>();
+        Assignments = new List<Card>();
 
-        while(hpSum < this.gethpTarget()) {
+        while(hpSum < this.hpTarget) {
             Card newCard = new Card(true);
-            assignments.Add(newCard);
-            hpSum += newCard.gethpGain();
+            Assignments.Add(newCard);
+            hpSum += newCard.hpGain;
         }
     }
-}
-
-public class GameDataManager : ScriptableObject
-{
-
-    public List<Card> assignments;
-    //public List<Card> chapterCards;
 }
 
 public class GameDataManager : ScriptableObject
@@ -70,7 +65,7 @@ public class GameDataManager : ScriptableObject
     }
 
     public List<Card> getAssignments() {
-        return board.assignments;
+        return board.Assignments;
     }
 
     public Card drawChapterCard() {
