@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : ScriptableObject
 {
     /*
     // Script references
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     // Items
 
     // Start is called before the first frame update
-    void Start()
+    public Player()
     {   
         // Returns a deep copy of all assignments
         assignments = GDM.getAssignments();
@@ -57,26 +57,26 @@ public class Player : MonoBehaviour
     }
 
     // Used to add or remove stamina
-    void getStamina() {
+    int getStamina() {
         return stamina;
     }
 
     // Used to add or remove money
-    void getMoney() {
+    int getMoney() {
         return money;
     }
 
     // Used to add or remove HP
-    void getHP() {
+    float getHP() {
         return hp;
     }
 
     // Draw card from assignments
     void drawCard() {
         successRate = 0;
-        if (assignements.size != 0) {
-            assignment = assignements.next();
-        } else if (failedAssignments.size != 0) {
+        if (assignments.size != 0) {
+            assignment = assignments.next();
+        } else if (failedAssignments.Size != 0) {
             assignment = failedAssignments.next();
         }
         
