@@ -1,17 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-struct player {
-    int id {get;}   //witch player
-    bool turn {get; set;}   //is it his turn (may be yeeted if everyone has a turn at the same time)
-    Card card {get; set;}   //what card has the player picked (null if no card is picked)
-    public Player(int id){
-        this.id = id;
-        turn = false;
-        card = null;
-    }
-}   
+   
 public class CardInteraction : MonoBehaviour
 {
     // Script references
