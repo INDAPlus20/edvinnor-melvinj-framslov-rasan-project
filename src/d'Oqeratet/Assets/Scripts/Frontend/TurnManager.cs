@@ -35,6 +35,8 @@ public class TurnManager : MonoBehaviour
             }
             choice = "none";
             // execute result
+
+            // advance
             if (turn < 3)
             {
                 turn++;
@@ -44,7 +46,6 @@ public class TurnManager : MonoBehaviour
                 round++;
                 turn = 0;
             }
-            // advance
         }
     }
 
