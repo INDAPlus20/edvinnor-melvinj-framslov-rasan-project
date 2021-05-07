@@ -10,8 +10,10 @@ public class Prototype : MonoBehaviour
     private int[] pstamina = {20, 20, 20, 20};
     private int thp = 12;
     private int tstamina = 6;
-    private int turn = 1;
+    private int round;
+    private int turn;
 
+    public GameObject gamehand;
     public TMP_Text player1;
     public TMP_Text player2;
     public TMP_Text player3;
@@ -20,11 +22,17 @@ public class Prototype : MonoBehaviour
 
     void Update()
     {
+        round = GameObject.Find("StageHand").GetComponent<TurnManager>().round;
+        turn = GameObject.Find("StageHand").GetComponent<TurnManager>().turn;
+        turn++;
+        //thp = gamehand.GetComponent<GameObject>;
+        //tstamina = gamehand.stamina;
+
         player1.text = "Player 1 \nHP: " + php[0] + "\nStamina: " + pstamina[0];
         player2.text = "Player 2 \nHP: " + php[1] + "\nStamina: " + pstamina[1];
         player3.text = "Player 3 \nHP: " + php[2] + "\nStamina: " + pstamina[2];
         player4.text = "Player 4 \nHP: " + php[3] + "\nStamina: " + pstamina[3];
-        tenta.text = "Tenta Player " + turn + "\nHP: " + thp + "\nStamina: " + tstamina;
+        tenta.text = "-Tenta-" + "\nHP: " + thp + "\nStamina: " + tstamina + "\nRound: " + round + "\nTurn: " + turn;
     }
 }
 

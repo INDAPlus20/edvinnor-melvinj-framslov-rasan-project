@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    /*
     // Script references
     GameDataManager GDM;
-    FrontEnd FE;
+    //FrontEnd FE;
 
     // Assignements
     List<Card> assignments;
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
             assignment = failedAssignments.next();
         }
         
-        FE.showAssignmentOptions();
+        //FE.showAssignmentOptions();
     }
 
     // Work or relax
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
             addStamina(10);
         }
 
-        FE.endTurn();
+        //FE.endTurn();
     }
 
     // Accept assignment
@@ -103,9 +104,9 @@ public class Player : MonoBehaviour
         if (choice) {
             GDM.drawChapterCard();
             addStamina(-5);
-            FE.showActions();
+            //FE.showActions();
         } else {
-            FE.showWorkOrRelax();
+            //FE.showWorkOrRelax();
         }
     }
 
@@ -134,6 +135,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        FE.endTurn();
+        //FE.endTurn();
     }
+    */
 }
