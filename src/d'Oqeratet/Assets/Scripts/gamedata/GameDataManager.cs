@@ -31,6 +31,10 @@ struct Board
             hpSum += newCard.gethpGain();
         }
     }
+}
+
+public class GameDataManager : ScriptableObject
+{
 
     public List<Card> assignments;
     //public List<Card> chapterCards;
@@ -56,11 +60,10 @@ public class GameDataManager : ScriptableObject
         return board.activePlayerIndex;
     }
 
-
-
     public Player getActivePlayer() {
         return board.ps[board.activePlayerIndex];
     }
+    
 
     public Player getPlayerFromIndex(int index) {
         return board.ps[index];
