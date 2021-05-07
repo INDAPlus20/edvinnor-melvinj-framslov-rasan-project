@@ -2,6 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+struct AssignmentList
+{
+    private List<Card> assignments;
+    private int index;
+
+    public AssignmentList(List<Card> assignments) {
+        this.assignments = assignments;
+        this.index = 0;
+    }
+
+    public Card NextAssignment() {
+        if (index < assignments.Count) {
+            return assignments[index];
+        }
+        //Requesting out of range
+        return null;
+    }
+
+    public void InsertAssignment(Card newCard) {
+        assignments.Add(newCard);
+    }
+}
+
 public class Player : ScriptableObject
 {
     /*
@@ -10,9 +33,14 @@ public class Player : ScriptableObject
     //FrontEnd FE;
 
     // Assignements
-    List<Card> assignments;
-    List<Card> failedAssignments;
-    Card assignment;
+    AssignmentList assignments;
+    AssignmentList failedAssignments;
+    Card assignment {get; set;}//@Rasmus fix
+
+    public Card tempGetAssignment() {
+        return assignment;
+    }
+
     int successRate;
 
     // Stats
@@ -27,8 +55,8 @@ public class Player : ScriptableObject
     public Player()
     {   
         // Returns a deep copy of all assignments
-        assignments = GDM.getAssignments();
-        failedAssignments = new List<Card>();
+        assignments = new AssignmentList(GDM.getAssignments());
+        failedAssignments = new AssignmentList(new List<Card>());
 
         // Stats
         int stamina = 100;
@@ -74,13 +102,12 @@ public class Player : ScriptableObject
     // Draw card from assignments
     void drawCard() {
         successRate = 0;
-        if (assignments.size != 0) {
-            assignment = assignments.next();
-        } else if (failedAssignments.Size != 0) {
-            assignment = failedAssignments.next();
+        assignment = assignments.NextAssignment();
+        if (assignment == null) {
+            assignment = failedAssignments.NextAssignment();
         }
         
-        //FE.showAssignmentOptions();
+        //FE.showAssignmentOptions(assignment); 
     }
 
     // Work or relax
@@ -123,15 +150,15 @@ public class Player : ScriptableObject
 
         // Roll for pass or fail
         if (successRate > Random.Range(0, 100)) {
-            if (assignements.contains(assignment)) {
-                assignements.remove(assignment);
+            if (assignments.Contains(assignment)) {
+                assignments.remove(assignment);
             } else {
-                faliedAssignements.remove(assignment);
+                faliedAssignments.remove(assignment);
             }
         } else {
-            if (assignements.contains(assignment)) {
-                assignements.remove(assignment);
-                faliedAssignements.add(assignment);
+            if (assignments.contains(assignment)) {
+                assignments.remove(assignment);
+                faliedAssignments.add(assignment);
             }
         }
 

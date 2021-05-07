@@ -24,10 +24,10 @@ public class CardInteraction : ScriptableObject
         //Replaced O(n) with O(1)
 
         Player cp = GDM.getActivePlayer();
-        Card as = cp.assignment;
-        if (as != null) {
-            cp.stamina -= as.staminaCost;
-            cp.hp += as.hpGain;
+        Card thing = cp.tempGetAssignment();
+        if (thing != null) {
+            cp.stamina -= thing.staminaCost;
+            cp.hp += thing.hpGain;
             cp.card = null;
         }
     }
