@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /*
     // Script references
     GameDataManager GDM;
     //FrontEnd FE;
@@ -16,10 +15,10 @@ public class Player : MonoBehaviour
     int successRate;
 
     // Stats
-    private int stamina;
-    static int maxStamina;
-    private float hp;
-    private int money;
+    public int stamina;
+    public int maxStamina;
+    public int hp;
+    public int money;
 
     // Items
 
@@ -27,18 +26,18 @@ public class Player : MonoBehaviour
     void Start()
     {   
         // Returns a deep copy of all assignments
-        assignments = GDM.getAssignments();
+        //assignments = GDM.getAssignments();
         failedAssignments = new List<Card>();
 
         // Stats
-        int stamina = 100;
-        int maxStamina = 100;
-        float hp = 0f;
-        int money = 500;
+        stamina = 100;
+        maxStamina = 100;
+        hp = 0;
+        money = 500;
     }
 
     // Used to add or remove stamina
-    void addStamina(int value) {
+    public void addStamina(int value) {
         if (stamina + value > maxStamina) {
             stamina = maxStamina;
         } else {
@@ -47,32 +46,17 @@ public class Player : MonoBehaviour
     }
 
     // Used to add or remove money
-    void addMoney(int value) {
+    public void addMoney(int value) {
         money += value;
     }
 
     // Used to add or remove HP
-    void addHP(int value) {
+    public void addHP(int value) {
         hp += value;
     }
 
-    // Used to add or remove stamina
-    void getStamina() {
-        return stamina;
-    }
-
-    // Used to add or remove money
-    void getMoney() {
-        return money;
-    }
-
-    // Used to add or remove HP
-    void getHP() {
-        return hp;
-    }
-
     // Draw card from assignments
-    void drawCard() {
+    /*void drawCard() {
         successRate = 0;
         if (assignements.size != 0) {
             assignment = assignements.next();
@@ -81,7 +65,7 @@ public class Player : MonoBehaviour
         }
         
         //FE.showAssignmentOptions();
-    }
+    }*/
 
     // Work or relax
     void goToWork(bool choice) {
@@ -100,7 +84,7 @@ public class Player : MonoBehaviour
     }
 
     // Accept assignment
-    void acceptAssignment(bool choice) {
+    /*void acceptAssignment(bool choice) {
         if (choice) {
             GDM.drawChapterCard();
             addStamina(-5);
@@ -108,7 +92,7 @@ public class Player : MonoBehaviour
         } else {
             //FE.showWorkOrRelax();
         }
-    }
+    }*/
 
     // Study for assignment
     void study() {
@@ -117,7 +101,7 @@ public class Player : MonoBehaviour
     }
 
     // Attempt assignment
-    void attemptAssignment() {
+    /*void attemptAssignment() {
         addStamina(-15);
         addHP(5);
 
@@ -136,6 +120,5 @@ public class Player : MonoBehaviour
         }
 
         //FE.endTurn();
-    }
-    */
+    }*/
 }

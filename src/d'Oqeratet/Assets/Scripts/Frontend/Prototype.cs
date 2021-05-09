@@ -6,32 +6,38 @@ using TMPro;
 
 public class Prototype : MonoBehaviour
 {
-    private int[] php = {0, 0, 0, 0};
-    private int[] pstamina = {20, 20, 20, 20};
-    private int thp = 12;
-    private int tstamina = 6;
+    private int thp;
+    private int tstamina;
 
-    private TurnManager tm;
+    public TurnManager tm;
+    private Card card;
 
     private int round;
     private int turn;
 
-    public GameObject gamehand;
     public TMP_Text player1;
     public TMP_Text player2;
     public TMP_Text player3;
     public TMP_Text player4;
     public TMP_Text tenta;
 
+    private int[] php;
+    private int[] pstamina;
+
     void Start() {
-        tm = GameObject.Find("Stage Hand").GetComponent<TurnManager>();
+        card = tm.card;
     }
 
     void Update()
     {
+        php = new int[] { tm.player1.hp, tm.player2.hp, tm.player3.hp, tm.player4.hp };
+        pstamina = new int[] { tm.player1.stamina, tm.player2.stamina, tm.player3.stamina, tm.player4.stamina };
         round = tm.round;
         turn = tm.turn;
         turn++;
+
+        thp = card.hpGain;
+        tstamina = card.staminaCost;
         //thp = gamehand.GetComponent<GameObject>;
         //tstamina = gamehand.stamina;
 
