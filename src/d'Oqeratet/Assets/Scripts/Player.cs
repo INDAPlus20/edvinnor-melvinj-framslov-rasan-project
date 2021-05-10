@@ -27,7 +27,6 @@ struct AssignmentList
 
 public class Player : ScriptableObject
 {
-    /*
     // Script references
     GameDataManager GDM;
     //FrontEnd FE;
@@ -44,10 +43,10 @@ public class Player : ScriptableObject
     int successRate;
 
     // Stats
-    private int stamina;
-    static int maxStamina;
-    private float hp;
-    private int money;
+    public int stamina;
+    public int maxStamina;
+    public int hp;
+    public int money;
 
     // Items
 
@@ -59,14 +58,14 @@ public class Player : ScriptableObject
         failedAssignments = new AssignmentList(new List<Card>());
 
         // Stats
-        int stamina = 100;
-        int maxStamina = 100;
-        float hp = 0f;
-        int money = 500;
+        stamina = 100;
+        maxStamina = 100;
+        hp = 0;
+        money = 500;
     }
 
     // Used to add or remove stamina
-    void addStamina(int value) {
+    public void addStamina(int value) {
         if (stamina + value > maxStamina) {
             stamina = maxStamina;
         } else {
@@ -75,40 +74,25 @@ public class Player : ScriptableObject
     }
 
     // Used to add or remove money
-    void addMoney(int value) {
+    public void addMoney(int value) {
         money += value;
     }
 
     // Used to add or remove HP
-    void addHP(int value) {
+    public void addHP(int value) {
         hp += value;
     }
 
-    // Used to add or remove stamina
-    int getStamina() {
-        return stamina;
-    }
-
-    // Used to add or remove money
-    int getMoney() {
-        return money;
-    }
-
-    // Used to add or remove HP
-    float getHP() {
-        return hp;
-    }
-
     // Draw card from assignments
-    void drawCard() {
+    /*void drawCard() {
         successRate = 0;
         assignment = assignments.NextAssignment();
         if (assignment == null) {
             assignment = failedAssignments.NextAssignment();
-        }
-        
-        //FE.showAssignmentOptions(assignment); 
-    }
+        }   
+
+        //FE.showAssignmentOptions();
+    }*/
 
     // Work or relax
     void goToWork(bool choice) {
@@ -127,7 +111,7 @@ public class Player : ScriptableObject
     }
 
     // Accept assignment
-    void acceptAssignment(bool choice) {
+    /*void acceptAssignment(bool choice) {
         if (choice) {
             GDM.drawChapterCard();
             addStamina(-5);
@@ -135,7 +119,7 @@ public class Player : ScriptableObject
         } else {
             //FE.showWorkOrRelax();
         }
-    }
+    }*/
 
     // Study for assignment
     void study() {
@@ -144,7 +128,7 @@ public class Player : ScriptableObject
     }
 
     // Attempt assignment
-    void attemptAssignment() {
+    /*void attemptAssignment() {
         addStamina(-15);
         addHP(5);
 
@@ -163,6 +147,5 @@ public class Player : ScriptableObject
         }
 
         //FE.endTurn();
-    }
-    */
+    }*/
 }
