@@ -1,32 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-struct player {
-    int id {get;}   //witch player
-    bool turn {get; set;}   //is it his turn (may be yeeted if everyone has a turn at the same time)
-    Card card {get; set;}   //what card has the player picked (null if no card is picked)
-    /*public Player(int id){
-        this.id = id;
-        turn = false;
-        card = null;
-    }*/
-}   
-public class CardInteraction : MonoBehaviour
+   
+public class CardInteraction : ScriptableObject
 {
     // Script references
-    //GameDataManager GDM;
-    //FrontEnd FE;
+    GameDataManager GDM;
+    //FrontEnd FE; Temporarily removed due to errors
 
-    //List<Player> players;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //initilise players or something discuss further with team
-    }
+    List<Player> players;
 
-    // Update is called once per frame
-    void Update()
+    void DoTheThing()
     {
         /*foreach (var p in players)
         {
@@ -35,6 +19,16 @@ public class CardInteraction : MonoBehaviour
                 GDM.setHP(p.id, GDM.getHP() - card.hpGain);
                 p.card = null;
             }
+        }*/
+
+        //Replaced O(n) with O(1)
+
+        /*Player cp = GDM.getActivePlayer();
+        Card thing = cp.NextAssignment();
+        if (thing != null) {
+            cp.stamina -= thing.staminaCost;
+            cp.hp += thing.hpGain;
+            cp.card = null;
         }*/
     }
 }

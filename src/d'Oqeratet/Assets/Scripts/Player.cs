@@ -2,16 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+struct AssignmentList
+{
+    private List<Card> assignments;
+    private int index;
+
+    public AssignmentList(List<Card> assignments) {
+        this.assignments = assignments;
+        this.index = 0;
+    }
+
+    public Card NextAssignment() {
+        if (index < assignments.Count) {
+            return assignments[index];
+        }
+        //Requesting out of range
+        return null;
+    }
+
+    public void InsertAssignment(Card newCard) {
+        assignments.Add(newCard);
+    }
+}
+
+public class Player : ScriptableObject
 {
     // Script references
     GameDataManager GDM;
     //FrontEnd FE;
 
     // Assignements
-    List<Card> assignments;
-    List<Card> failedAssignments;
-    Card assignment;
+    AssignmentList assignments;
+    AssignmentList failedAssignments;
+    Card assignment {get; set;}//@Rasmus fix
+
+    public Card tempGetAssignment() {
+        return assignment;
+    }
+
     int successRate;
 
     // Stats
@@ -23,11 +51,11 @@ public class Player : MonoBehaviour
     // Items
 
     // Start is called before the first frame update
-    void Start()
+    public Player()
     {   
         // Returns a deep copy of all assignments
-        //assignments = GDM.getAssignments();
-        failedAssignments = new List<Card>();
+        assignments = new AssignmentList(GDM.getAssignments());
+        failedAssignments = new AssignmentList(new List<Card>());
 
         // Stats
         stamina = 100;
@@ -58,12 +86,11 @@ public class Player : MonoBehaviour
     // Draw card from assignments
     /*void drawCard() {
         successRate = 0;
-        if (assignements.size != 0) {
-            assignment = assignements.next();
-        } else if (failedAssignments.size != 0) {
-            assignment = failedAssignments.next();
-        }
-        
+        assignment = assignments.NextAssignment();
+        if (assignment == null) {
+            assignment = failedAssignments.NextAssignment();
+        }   
+
         //FE.showAssignmentOptions();
     }*/
 
@@ -107,15 +134,15 @@ public class Player : MonoBehaviour
 
         // Roll for pass or fail
         if (successRate > Random.Range(0, 100)) {
-            if (assignements.contains(assignment)) {
-                assignements.remove(assignment);
+            if (assignments.Contains(assignment)) {
+                assignments.remove(assignment);
             } else {
-                faliedAssignements.remove(assignment);
+                faliedAssignments.remove(assignment);
             }
         } else {
-            if (assignements.contains(assignment)) {
-                assignements.remove(assignment);
-                faliedAssignements.add(assignment);
+            if (assignments.contains(assignment)) {
+                assignments.remove(assignment);
+                faliedAssignments.add(assignment);
             }
         }
 
