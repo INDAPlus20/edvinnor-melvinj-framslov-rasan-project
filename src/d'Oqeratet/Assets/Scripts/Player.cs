@@ -9,10 +9,11 @@ struct AssignmentList
 
     public AssignmentList(List<Card> assignments) {
         this.assignments = assignments;
-        this.index = 0;
+        this.index = -1;
     }
 
     public Card NextAssignment() {
+        index += 1;
         if (index < assignments.Count) {
             return assignments[index];
         }
@@ -34,11 +35,7 @@ public class Player : MonoBehaviour
     // Assignements
     AssignmentList assignments;
     AssignmentList failedAssignments;
-    Card assignment {get; set;}//@Rasmus fix
-
-    public Card tempGetAssignment() {
-        return assignment;
-    }
+    //Card assignment;
 
     int successRate;
 
@@ -47,6 +44,8 @@ public class Player : MonoBehaviour
     public int maxStamina;
     public int hp;
     public int money;
+
+    private Card lastAssignment = null;
 
     // Items
 
@@ -86,13 +85,19 @@ public class Player : MonoBehaviour
     // Draw card from assignments
     public Card drawCard() {
         //successRate = 0;
-        assignment = assignments.NextAssignment();
+        Card assignment = assignments.NextAssignment();
         if (assignment == null) {
             assignment = failedAssignments.NextAssignment();
-        }   
+        }
+
+        this.lastAssignment = assignment;   
 
         return assignment;
         //FE.showAssignmentOptions();
+    }
+
+    public Card getLastAssignment() {
+        return this.lastAssignment;
     }
 
     // Work or relax

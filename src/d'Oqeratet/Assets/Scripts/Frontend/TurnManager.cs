@@ -37,7 +37,7 @@ public class TurnManager : MonoBehaviour
 
             //Get active player's assignment card
             //Causes issues since there currently (05-11) is no Card prefab
-            /*assignment = active_player.drawCard();*/
+            card = active_player.drawCard();
 
 
             // ask for card TODO when cards are set up
