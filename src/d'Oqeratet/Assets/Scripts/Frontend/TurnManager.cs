@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     public int stamina;
 
     public Card card;
-    public Card exam;
+    public Card assignment;
 
     private GameDataManager GDM;
 
@@ -35,9 +35,9 @@ public class TurnManager : MonoBehaviour
             //Get active player from GDM
             Player active_player = GDM.getActivePlayer();
 
-            //Get active player's exam card
+            //Get active player's assignment card
             //Causes issues since there currently (05-11) is no Card prefab
-            /*exam = active_player.drawCard();*/
+            /*assignment = active_player.drawCard();*/
 
 
             // ask for card TODO when cards are set up

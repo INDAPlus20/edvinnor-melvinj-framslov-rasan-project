@@ -7,7 +7,7 @@ struct Board
     public int hpTarget; //Graduation goal
     public Player[] ps; //players
     public int activePlayerIndex; //Index of player currently having their turn
-    public List<Card> Assignments; //List of all mandatory exams
+    public List<Card> Assignments; //List of all mandatory assignments
 
     public Board(int numPlayers, int hpTarget, Player[] temp_input_ps)
     {
@@ -36,7 +36,7 @@ struct Board
         int hpSum = 0;
         Assignments = new List<Card>();
 
-        //Generate more exams until we have an entire deck surpassing the graduation goal
+        //Generate more assignments until we have an entire deck surpassing the graduation goal
         while(hpSum < this.hpTarget) 
         {
             Card newCard = ScriptableObject.CreateInstance<Card>();
@@ -87,7 +87,7 @@ public class GameDataManager : MonoBehaviour
         return board.ps[index];
     }
 
-    //Returns the global list of exams
+    //Returns the global list of assignments
     public List<Card> getAssignments() 
     {
         return board.Assignments;
