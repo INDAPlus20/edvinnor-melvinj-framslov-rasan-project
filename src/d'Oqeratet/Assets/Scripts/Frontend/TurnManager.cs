@@ -4,64 +4,101 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    
+    // Script references
+    GameDataManager GDM;
+
+    // Counters
     public int round = 0;
     public int turn = 0;
+
+    // Active turn
     private string choice = "none";
     public int hp;
     public int stamina;
 
-    public Player player1;
-    public Player player2;
-    public Player player3;
-    public Player player4;
+    private void Start()
+    {
+        // Get GDM reference by name
+        StartCoroutine(GameLoop());
+    }
 
-    public Card card;
-
+    // Used by buttons?
     public void MakeChoice(string input)
     {
         choice = input;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(GameLoop());
     }
 
     private IEnumerator GameLoop()
     {
         while (true)
         {
-            // ask for card TODO when cards are set up
+            // Ask for card
 
-            // display card TODO when cards are set up
-
-            // execute result
+            // Display Assignment card
             yield return WaitForInput();
+
+            // Execute choice
             if (choice == "yes")
             {
-                switch (turn) {
-                    case 0:
-                        player1.hp += card.hpGain;
-                        player1.stamina -= card.staminaCost;
+                choice = "none";
+                //GDM.activeplayer.addStamina(-5);
+
+                // Display Chapter-card
+
+                // Do actions, max 3
+                int choicesMade = 0;
+                while (choicesMade++ < 3) 
+                {
+                    yield return WaitForInput();
+                    if (choice == "study") 
+                    {
+                        //GDM.activeplayer.addStamina(-20);
+                    }
+                    else if (choice == "purchase")
+                    {
+
+                    }
+                    else if (choice == "chapter event")
+                    {
+
+                    }
+                    else if (choice == "continue")
+                    {   
                         break;
-                    case 1:
-                        player2.hp += card.hpGain;
-                        player2.stamina -= card.staminaCost;
-                        break;
-                    case 2:
-                        player3.hp += card.hpGain;
-                        player3.stamina -= card.staminaCost;
-                        break;
-                    case 3:
-                        player4.hp += card.hpGain;
-                        player4.stamina -= card.staminaCost;
-                        break;
+                    }
+                }
+
+                // Display Attempt Assignment Option
+                yield return WaitForInput();
+                if (choice == "yes") 
+                {
+                    //GDM.activeplayer.card.play();
+                }
+                else if (choice == "no")
+                {
+
+                }
+            } 
+            else if (choice == "no") 
+            {
+                choice = "none";
+
+                // Display Work or Relax -Option
+                yield return WaitForInput();
+                if (choice == "work") 
+                {   
+                    //GDM.activePlayer.addMoney(500);
+                    //GDM.activeplayer.addStamina(-15);
+                } 
+                else if (choice == "relax") 
+                {
+                    //GDM.activeplayer.addStamina(25);
                 }
             }
             choice = "none";
+            
 
-            // advance
+            // Advance turn counter
             if (turn < 3)
             {
                 turn++;
