@@ -11,11 +11,6 @@ public class TurnManager : MonoBehaviour
     public int hp;
     public int stamina;
 
-    public Player player1;
-    public Player player2;
-    public Player player3;
-    public Player player4;
-
     public Card card;
     public Card exam;
 
@@ -55,24 +50,6 @@ public class TurnManager : MonoBehaviour
             {
                 active_player.addHP(card.hpGain);
                 active_player.addStamina(-card.staminaCost);
-                /*switch (turn) {
-                    case 0:
-                        player1.hp += card.hpGain;
-                        player1.stamina -= card.staminaCost;
-                        break;
-                    case 1:
-                        player2.hp += card.hpGain;
-                        player2.stamina -= card.staminaCost;
-                        break;
-                    case 2:
-                        player3.hp += card.hpGain;
-                        player3.stamina -= card.staminaCost;
-                        break;
-                    case 3:
-                        player4.hp += card.hpGain;
-                        player4.stamina -= card.staminaCost;
-                        break;
-                }*/
             }
             choice = "none";
 
