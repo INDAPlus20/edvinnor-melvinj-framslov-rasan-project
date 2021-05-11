@@ -44,4 +44,10 @@ public class AssignmentCard : ScriptableObject
         this.name = name;
         this.description = description;
     }
+
+    public void play(){ 
+        GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        gdm.getActivePlayer().addStamina(stamina);
+        gdm.getActivePlayer().addHp(hp);
+    }
 }

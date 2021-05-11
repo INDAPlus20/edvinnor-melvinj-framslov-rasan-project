@@ -28,6 +28,7 @@ public class ChapterCard : ScriptableObject
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         for (int i = 0; i < players.Length; i++){
             gdm.getPlayerFromIndex(players[i]).addStamina(stamina[i]);
+            gdm.getPlayerFromIndex(players[i]).addMoney(stamina[i]);
         }
     }
 }
