@@ -50,13 +50,15 @@ public class GameDataManager : MonoBehaviour
     public Player temp_p4;
 
     private Board board;
+    private int num_players;
     
     //Constructor
     void Start()
     {
         Debug.Log("Starting GDM");
         Player[] temp_input_ps = new Player[] {temp_p1, temp_p2, temp_p3, temp_p4};
-        board = new Board(4, 300, temp_input_ps);
+        this.num_players = 4;
+        board = new Board(this.num_players, 300, temp_input_ps);
     }
 
     public void setPlayerTurn(int newActivePlayerIndex) {
@@ -77,7 +79,28 @@ public class GameDataManager : MonoBehaviour
 
     public Card drawChapterCard() {
         //@Edvin
-        return new Card(true);
+        Debug.Log("NOT IN USE");
+        return ScriptableObject.CreateInstance</*Chapter*/Card>();
+    }
+
+    public int[] getAllHps() {
+        int[] to_return = new int[this.num_players];
+        for (int i = 0; i < this.num_players; i++) {
+            to_return[i] = getPlayerFromIndex(i).hp;
+        }
+        return to_return;
+    }
+
+    public int[] getAllStaminas() {
+        int[] to_return = new int[this.num_players];
+        for (int i = 0; i < this.num_players; i++) {
+            to_return[i] = getPlayerFromIndex(i).stamina;
+        }
+        return to_return;
+    }
+
+    public int getTurnIndex() {
+        return board.activePlayerIndex;
     }
 
 }

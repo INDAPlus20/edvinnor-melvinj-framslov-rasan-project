@@ -32,10 +32,10 @@ public class Prototype : MonoBehaviour
 
     void Update()
     {
-        players_hp = new int[] { tm.player1.hp, tm.player2.hp, tm.player3.hp, tm.player4.hp };
-        players_stamina = new int[] { tm.player1.stamina, tm.player2.stamina, tm.player3.stamina, tm.player4.stamina };
+        players_hp = gdm.getAllHps();
+        players_stamina = gdm.getAllStaminas();
         current_round = tm.round;
-        current_turn = tm.turn;
+        current_turn = gdm.getTurnIndex();
         current_turn++;
 
         exam_hp = card.hpGain;
