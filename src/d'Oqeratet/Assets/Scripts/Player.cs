@@ -25,7 +25,7 @@ struct AssignmentList
     }
 }
 
-public class Player : ScriptableObject
+public class Player : MonoBehaviour
 {
     // Script references
     GameDataManager GDM;
@@ -51,17 +51,18 @@ public class Player : ScriptableObject
     // Items
 
     // Start is called before the first frame update
-    public Player()
-    {   
+    void Start() {
+        GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         // Returns a deep copy of all assignments
-        assignments = new AssignmentList(GDM.getAssignments());
-        failedAssignments = new AssignmentList(new List<Card>());
+        this.assignments = new AssignmentList(GDM.getAssignments());
+        this.failedAssignments = new AssignmentList(new List<Card>());
+        Debug.Log("testing");
 
         // Stats
-        stamina = 100;
-        maxStamina = 100;
-        hp = 0;
-        money = 500;
+        this.stamina = 100;
+        this.maxStamina = 100;
+        this.hp = 0;
+        this.money = 500;
     }
 
     // Used to add or remove stamina
@@ -148,4 +149,8 @@ public class Player : ScriptableObject
 
         //FE.endTurn();
     }*/
+
+    void Update () {
+
+    }
 }

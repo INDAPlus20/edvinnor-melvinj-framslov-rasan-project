@@ -17,7 +17,7 @@ struct Board
         Player[] tempPlayers = new Player[numPlayers];
 
         for(int i = 0; i < numPlayers; i++) {
-            tempPlayers[i] = new Player();
+            tempPlayers[i] = GameObject.Find("Player " + (i+1)).GetComponent<Player>();
         }
 
         this.hpTarget = hpTarget;
@@ -35,15 +35,15 @@ struct Board
     }
 }
 
-public class GameDataManager : ScriptableObject
+public class GameDataManager : MonoBehaviour
 {
 
     private Board board;
     
     //Constructor
-    public GameDataManager()
+    void Start()
     {
-        Debug.Log("Constructing GDM");
+        Debug.Log("Starting GDM");
         board = new Board(4, 300);
     }
 
