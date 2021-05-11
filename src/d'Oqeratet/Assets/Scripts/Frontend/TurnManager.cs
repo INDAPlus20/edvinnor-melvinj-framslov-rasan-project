@@ -17,6 +17,9 @@ public class TurnManager : MonoBehaviour
     public Player player4;
 
     public Card card;
+    public Card exam;
+
+    private GameDataManager GDM;
 
     public void MakeChoice(string input)
     {
@@ -25,13 +28,23 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
+        GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         StartCoroutine(GameLoop());
     }
 
     private IEnumerator GameLoop()
     {
+
         while (true)
         {
+            //Get active player from GDM
+            Player active_player = GDM.getActivePlayer();
+
+            //Get active player's exam card
+            //Causes issues since there currently (05-11) is no Card prefab
+            /*exam = active_player.drawCard();*/
+
+
             // ask for card TODO when cards are set up
 
             // display card TODO when cards are set up

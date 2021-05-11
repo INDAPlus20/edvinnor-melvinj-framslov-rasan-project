@@ -84,15 +84,16 @@ public class Player : MonoBehaviour
     }
 
     // Draw card from assignments
-    /*void drawCard() {
-        successRate = 0;
+    public Card drawCard() {
+        //successRate = 0;
         assignment = assignments.NextAssignment();
         if (assignment == null) {
             assignment = failedAssignments.NextAssignment();
         }   
 
+        return assignment;
         //FE.showAssignmentOptions();
-    }*/
+    }
 
     // Work or relax
     void goToWork(bool choice) {
