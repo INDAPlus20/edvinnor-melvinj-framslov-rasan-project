@@ -103,4 +103,8 @@ public class GameDataManager : MonoBehaviour
         return board.activePlayerIndex;
     }
 
+    public void testReference(string reference) {
+        Debug.Log("Reference " + reference + " to GDM ok");
+    }
+
 }
