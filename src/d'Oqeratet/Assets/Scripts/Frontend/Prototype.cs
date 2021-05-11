@@ -9,7 +9,7 @@ public class Prototype : MonoBehaviour
     private int exam_hp;
     private int exam_stamina;
 
-    public TurnManager tm;
+    private TurnManager tm;
     private GameDataManager gdm;
     private Card card;
 
@@ -26,8 +26,9 @@ public class Prototype : MonoBehaviour
     private int[] players_stamina;
 
     void Start() {
-        card = tm.card;
         gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        tm = GameObject.Find("Stage Hand").GetComponent<TurnManager>();
+        card = tm.card;
     }
 
     void Update()
