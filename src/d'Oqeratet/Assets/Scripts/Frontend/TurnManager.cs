@@ -53,7 +53,9 @@ public class TurnManager : MonoBehaviour
             yield return WaitForInput();
             if (choice == "yes")
             {
-                switch (turn) {
+                active_player.addHP(card.hpGain);
+                active_player.addStamina(-card.staminaCost);
+                /*switch (turn) {
                     case 0:
                         player1.hp += card.hpGain;
                         player1.stamina -= card.staminaCost;
@@ -70,7 +72,7 @@ public class TurnManager : MonoBehaviour
                         player4.hp += card.hpGain;
                         player4.stamina -= card.staminaCost;
                         break;
-                }
+                }*/
             }
             choice = "none";
 
@@ -84,6 +86,9 @@ public class TurnManager : MonoBehaviour
                 round++;
                 turn = 0;
             }
+
+            //Updates GDM with the next turn
+            GDM.setPlayerTurn(turn);
         }
     }
 

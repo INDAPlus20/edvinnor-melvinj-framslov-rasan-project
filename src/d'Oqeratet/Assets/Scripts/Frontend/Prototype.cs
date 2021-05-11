@@ -10,6 +10,7 @@ public class Prototype : MonoBehaviour
     private int exam_stamina;
 
     public TurnManager tm;
+    private GameDataManager gdm;
     private Card card;
 
     private int current_round;
@@ -26,6 +27,7 @@ public class Prototype : MonoBehaviour
 
     void Start() {
         card = tm.card;
+        gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
     }
 
     void Update()
