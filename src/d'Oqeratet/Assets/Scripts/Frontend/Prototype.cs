@@ -45,17 +45,7 @@ public class Prototype : MonoBehaviour
         player2.text = "Player 2 \nHP: " + players_hp[1] + "\nStamina: " + players_stamina[1];
         player3.text = "Player 3 \nHP: " + players_hp[2] + "\nStamina: " + players_stamina[2];
         player4.text = "Player 4 \nHP: " + players_hp[3] + "\nStamina: " + players_stamina[3];
-        Debug.Log(exam.text);
-        exam.text = 
-        "-Tenta-"
-         + "\nHP: "
-          + exam_hp
-           + "\nStamina: "
-            + exam_stamina
-             + "\nRound: "
-              + current_round
-               + "\nTurn: "
-                + current_turn;
+        exam.text = "-Tenta-" + "\nHP: " + exam_hp + "\nStamina: " + exam_stamina + "\nRound: " + current_round + "\nTurn: " + current_turn;
     }
 }
 
