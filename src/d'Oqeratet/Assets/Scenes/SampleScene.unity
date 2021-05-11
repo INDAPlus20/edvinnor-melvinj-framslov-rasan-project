@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 721910266}
   - component: {fileID: 721910265}
   m_Layer: 5
-  m_Name: Exam
+  m_Name: Assignment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,12 +947,8 @@ MonoBehaviour:
   turn: 0
   hp: 0
   stamina: 0
-  player1: {fileID: 34744443}
-  player2: {fileID: 1918533409}
-  player3: {fileID: 322430244}
-  player4: {fileID: 1860337093}
   card: {fileID: 11400000, guid: db63357c11691ce4bab782154637102a, type: 2}
-  exam: {fileID: 0}
+  assignment: {fileID: 0}
 --- !u!1 &1115070995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,12 +1068,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c24dfa8a22e3304b92578b081add670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tm: {fileID: 1092172594}
   player1: {fileID: 98432098}
   player2: {fileID: 1657349878}
   player3: {fileID: 1811634911}
   player4: {fileID: 1214543961}
-  exam: {fileID: 721910265}
+  assignment: {fileID: 721910265}
 --- !u!1 &1151314913
 GameObject:
   m_ObjectHideFlags: 0
