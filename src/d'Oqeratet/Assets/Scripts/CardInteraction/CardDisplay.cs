@@ -15,7 +15,7 @@ public class CardDisplay : MonoBehaviour
     void Start()
     {
         /*
-        Causing Null Pointers, commented out
+        Causing Null Pointers, fix by adding the components in Unity GUI
         nameText.text = card.name;
         descriptionText.text = card.description;
         artworkImage.sprite = card.artwork;
