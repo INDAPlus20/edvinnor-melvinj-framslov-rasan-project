@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
         // Returns a deep copy of all assignments
         this.assignments = new AssignmentList(GDM.getAssignments());
         this.failedAssignments = new AssignmentList(new List<Card>());
-        Debug.Log("testing");
 
         // Stats
         this.stamina = 100;

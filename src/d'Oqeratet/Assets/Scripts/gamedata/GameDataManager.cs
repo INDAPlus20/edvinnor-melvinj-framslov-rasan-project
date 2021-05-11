@@ -28,7 +28,7 @@ struct Board
         Assignments = new List<Card>();
 
         while(hpSum < this.hpTarget) {
-            Card newCard = new Card(true);
+            Card newCard = ScriptableObject.CreateInstance<Card>();
             Assignments.Add(newCard);
             hpSum += newCard.hpGain;
         }
