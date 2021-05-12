@@ -33,7 +33,8 @@ public class TurnManager : MonoBehaviour
     {
         while (true)
         {
-            // Ask for card
+            // Draw new card from active player
+            GDM.getActivePlayer.drawCard();
 
             // Display Assignment card
             yield return WaitForInput();
@@ -41,8 +42,9 @@ public class TurnManager : MonoBehaviour
             // Execute choice
             if (choice == "yes")
             {
+                // Prepare for assignment selected
                 choice = "none";
-                //GDM.activeplayer.addStamina(-5);
+                GDM.getActivePlayer().addStamina(-5);
 
                 // Display Chapter-card
 
@@ -53,15 +55,15 @@ public class TurnManager : MonoBehaviour
                     yield return WaitForInput();
                     if (choice == "study") 
                     {
-                        //GDM.activeplayer.addStamina(-20);
+                        GDM.getActivePlayer().addStamina(-20);
                     }
                     else if (choice == "purchase")
                     {
-
+                        //GDM.getActivePlayer().doStuff();
                     }
                     else if (choice == "chapter event")
                     {
-
+                        //GDM.getActivePlayer().doStuff();
                     }
                     else if (choice == "continue")
                     {   
@@ -73,7 +75,7 @@ public class TurnManager : MonoBehaviour
                 yield return WaitForInput();
                 if (choice == "yes") 
                 {
-                    //GDM.activeplayer.card.play();
+                    GDM.getActivePlayer().tempGetAssignment().play();
                 }
                 else if (choice == "no")
                 {
@@ -109,6 +111,8 @@ public class TurnManager : MonoBehaviour
                 round++;
                 turn = 0;
             }
+
+            GDM.setPlayerTurn(turn);
         }
     }
 

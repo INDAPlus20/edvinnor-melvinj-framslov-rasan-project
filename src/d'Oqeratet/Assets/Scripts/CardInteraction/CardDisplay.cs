@@ -14,10 +14,13 @@ public class CardDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
+        Causing Null Pointers, fix by adding the components in Unity GUI
         nameText.text = card.name;
         descriptionText.text = card.description;
         artworkImage.sprite = card.artwork;
         hpGainText.text = card.hpGain.ToString();
         staminaCostText.text = card.staminaCost.ToString();
+        */
     }
 }

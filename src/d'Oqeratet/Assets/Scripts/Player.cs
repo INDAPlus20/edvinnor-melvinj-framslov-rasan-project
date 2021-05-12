@@ -9,10 +9,11 @@ struct AssignmentList
 
     public AssignmentList(List<Card> assignments) {
         this.assignments = assignments;
-        this.index = 0;
+        this.index = -1;
     }
 
     public Card NextAssignment() {
+        index += 1;
         if (index < assignments.Count) {
             return assignments[index];
         }
@@ -25,7 +26,7 @@ struct AssignmentList
     }
 }
 
-public class Player : ScriptableObject
+public class Player : MonoBehaviour
 {
     // Script references
     GameDataManager GDM;
@@ -34,11 +35,7 @@ public class Player : ScriptableObject
     // Assignements
     AssignmentList assignments;
     AssignmentList failedAssignments;
-    Card assignment {get; set;}//@Rasmus fix
-
-    public Card tempGetAssignment() {
-        return assignment;
-    }
+    //Card assignment;
 
     int successRate;
 
@@ -48,20 +45,22 @@ public class Player : ScriptableObject
     public int hp;
     public int money;
 
+    private Card lastAssignment = null;
+
     // Items
 
     // Start is called before the first frame update
-    public Player()
-    {   
+    void Start() {
+        GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         // Returns a deep copy of all assignments
-        assignments = new AssignmentList(GDM.getAssignments());
-        failedAssignments = new AssignmentList(new List<Card>());
+        this.assignments = new AssignmentList(GDM.getAssignments());
+        this.failedAssignments = new AssignmentList(new List<Card>());
 
         // Stats
-        stamina = 100;
-        maxStamina = 100;
-        hp = 0;
-        money = 500;
+        this.stamina = 100;
+        this.maxStamina = 100;
+        this.hp = 0;
+        this.money = 500;
     }
 
     // Used to add or remove stamina
@@ -84,15 +83,22 @@ public class Player : ScriptableObject
     }
 
     // Draw card from assignments
-    /*void drawCard() {
-        successRate = 0;
-        assignment = assignments.NextAssignment();
+    public Card drawCard() {
+        //successRate = 0;
+        Card assignment = assignments.NextAssignment();
         if (assignment == null) {
             assignment = failedAssignments.NextAssignment();
-        }   
+        }
 
+        this.lastAssignment = assignment;   
+
+        return assignment;
         //FE.showAssignmentOptions();
-    }*/
+    }
+
+    public Card getLastAssignment() {
+        return this.lastAssignment;
+    }
 
     // Work or relax
     void goToWork(bool choice) {
@@ -148,4 +154,8 @@ public class Player : ScriptableObject
 
         //FE.endTurn();
     }*/
+
+    void Update () {
+
+    }
 }
