@@ -13,6 +13,11 @@ struct AssignmentList
     }
 
     public AssignmentCard NextAssignment() {
+        if (assignments == null) {
+            GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+            assignments = gdm.getAssignments();
+            index = -1;
+        }
         index += 1;
         if (index < assignments.Count) {
             return assignments[index];

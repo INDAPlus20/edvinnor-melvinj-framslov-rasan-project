@@ -20,7 +20,16 @@ public class TurnManager : MonoBehaviour
     {
         // Get GDM reference by name
         GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-        StartCoroutine(GameLoop());
+    }
+
+    private bool first = true;
+
+    void Update() {
+        if (first) 
+        {
+            first = false;
+            StartCoroutine(GameLoop());
+        }
     }
 
     // Used by buttons?
