@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         // Get GDM reference by name
+        GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         StartCoroutine(GameLoop());
     }
 
