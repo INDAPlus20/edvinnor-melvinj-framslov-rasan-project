@@ -4,56 +4,104 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    
+    // Script references
+    GameDataManager GDM;
+
+    // Counters
     public int round = 0;
     public int turn = 0;
+
+    // Active turn
     private string choice = "none";
     public int hp;
     public int stamina;
 
-    public Card card;
-    public Card assignment;
+    private void Start()
+    {
+        // Get GDM reference by name
+        GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        StartCoroutine(GameLoop());
+    }
 
-    private GameDataManager GDM;
-
+    // Used by buttons?
     public void MakeChoice(string input)
     {
         choice = input;
     }
 
-    private void Start()
-    {
-        GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-        StartCoroutine(GameLoop());
-    }
-
     private IEnumerator GameLoop()
     {
-
         while (true)
         {
-            //Get active player from GDM
-            Player active_player = GDM.getActivePlayer();
+            // Draw new card from active player
+            GDM.getActivePlayer.drawCard();
 
-            //Get active player's assignment card
-            //Causes issues since there currently (05-11) is no Card prefab
-            card = active_player.drawCard();
-
-
-            // ask for card TODO when cards are set up
-
-            // display card TODO when cards are set up
-
-            // execute result
+            // Display Assignment card
             yield return WaitForInput();
+
+            // Execute choice
             if (choice == "yes")
             {
-                active_player.addHP(card.hpGain);
-                active_player.addStamina(-card.staminaCost);
+                // Prepare for assignment selected
+                choice = "none";
+                GDM.getActivePlayer().addStamina(-5);
+
+                // Display Chapter-card
+
+                // Do actions, max 3
+                int choicesMade = 0;
+                while (choicesMade++ < 3) 
+                {
+                    yield return WaitForInput();
+                    if (choice == "study") 
+                    {
+                        GDM.getActivePlayer().addStamina(-20);
+                    }
+                    else if (choice == "purchase")
+                    {
+                        //GDM.getActivePlayer().doStuff();
+                    }
+                    else if (choice == "chapter event")
+                    {
+                        //GDM.getActivePlayer().doStuff();
+                    }
+                    else if (choice == "continue")
+                    {   
+                        break;
+                    }
+                }
+
+                // Display Attempt Assignment Option
+                yield return WaitForInput();
+                if (choice == "yes") 
+                {
+                    GDM.getActivePlayer().tempGetAssignment().play();
+                }
+                else if (choice == "no")
+                {
+
+                }
+            } 
+            else if (choice == "no") 
+            {
+                choice = "none";
+
+                // Display Work or Relax -Option
+                yield return WaitForInput();
+                if (choice == "work") 
+                {   
+                    //GDM.activePlayer.addMoney(500);
+                    //GDM.activeplayer.addStamina(-15);
+                } 
+                else if (choice == "relax") 
+                {
+                    //GDM.activeplayer.addStamina(25);
+                }
             }
             choice = "none";
+            
 
-            // advance
+            // Advance turn counter
             if (turn < 3)
             {
                 turn++;
@@ -64,7 +112,6 @@ public class TurnManager : MonoBehaviour
                 turn = 0;
             }
 
-            //Updates GDM with the next turn
             GDM.setPlayerTurn(turn);
         }
     }
