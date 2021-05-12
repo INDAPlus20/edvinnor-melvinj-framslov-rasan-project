@@ -18,7 +18,7 @@ public class AssignmentCard : ScriptableObject
         if (true)
         {
             stamina = Random.Range(-40, -20);
-            hp = Random.Range(-18, -12);
+            hp = Random.Range(18, 12);
         }
     }
 
@@ -28,10 +28,10 @@ public class AssignmentCard : ScriptableObject
         description = "description";
         if (rand){
             stamina = Random.Range(-40, -20);
-            hp = Random.Range(-18, -12);
+            hp = Random.Range(18, 12);
         }
         else{
-            hp = -14;
+            hp = 14;
             stamina = -30;
         }
     }
