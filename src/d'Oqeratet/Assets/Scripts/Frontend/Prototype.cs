@@ -11,7 +11,7 @@ public class Prototype : MonoBehaviour
 
     private TurnManager tm;
     private GameDataManager gdm;
-    private Card card;
+    private AssignmentCard card;
 
     private int current_round;
     private int current_turn;

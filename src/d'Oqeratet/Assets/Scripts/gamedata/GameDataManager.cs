@@ -7,7 +7,7 @@ struct Board
     public int hpTarget; //Graduation goal
     public Player[] ps; //players
     public int activePlayerIndex; //Index of player currently having their turn
-    public List<Card> Assignments; //List of all mandatory assignments
+    public List<AssignmentCard> Assignments; //List of all mandatory assignments
 
     public Board(int numPlayers, int hpTarget, Player[] temp_input_ps)
     {
@@ -88,14 +88,14 @@ public class GameDataManager : MonoBehaviour
     }
 
     //Returns the global list of assignments
-    public List<Card> getAssignments() 
+    public List<AssignmentCard> getAssignments() 
     {
         return board.Assignments;
     }
 
     //In future:
     //Will return the next chapter card from the global deck
-    public Card drawChapterCard() 
+    public AssignmentCard drawChapterCard() 
     {
         //@Edvin
         Debug.Log("NOT IN USE");
