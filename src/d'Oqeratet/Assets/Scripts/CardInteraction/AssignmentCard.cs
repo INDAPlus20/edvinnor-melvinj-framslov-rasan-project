@@ -18,7 +18,7 @@ public class AssignmentCard : ScriptableObject
         if (true)
         {
             stamina = Random.Range(-40, -20);
-            hp = Random.Range(-18, -12);
+            hp = Random.Range(18, 12);
         }
     }
 
@@ -28,10 +28,10 @@ public class AssignmentCard : ScriptableObject
         description = "description";
         if (rand){
             stamina = Random.Range(-40, -20);
-            hp = Random.Range(-18, -12);
+            hp = Random.Range(18, 12);
         }
         else{
-            hp = -14;
+            hp = 14;
             stamina = -30;
         }
     }
@@ -48,6 +48,6 @@ public class AssignmentCard : ScriptableObject
     public void play(){ 
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         gdm.getActivePlayer().addStamina(stamina);
-        gdm.getActivePlayer().addHp(hp);
+        gdm.getActivePlayer().addHP(hp);
     }
 }

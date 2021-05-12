@@ -4,15 +4,20 @@ using UnityEngine;
 
 struct AssignmentList
 {
-    private List<Card> assignments;
+    private List<AssignmentCard> assignments;
     private int index;
 
-    public AssignmentList(List<Card> assignments) {
+    public AssignmentList(List<AssignmentCard> assignments) {
         this.assignments = assignments;
         this.index = -1;
     }
 
-    public Card NextAssignment() {
+    public AssignmentCard NextAssignment() {
+        if (assignments == null) {
+            GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+            assignments = gdm.getAssignments();
+            index = -1;
+        }
         index += 1;
         if (index < assignments.Count) {
             return assignments[index];
@@ -21,7 +26,7 @@ struct AssignmentList
         return null;
     }
 
-    public void InsertAssignment(Card newCard) {
+    public void InsertAssignment(AssignmentCard newCard) {
         assignments.Add(newCard);
     }
 }
@@ -45,7 +50,7 @@ public class Player : MonoBehaviour
     public int hp;
     public int money;
 
-    private Card lastAssignment = null;
+    private AssignmentCard lastAssignment = null;
 
     // Items
 
@@ -54,7 +59,7 @@ public class Player : MonoBehaviour
         GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         // Returns a deep copy of all assignments
         this.assignments = new AssignmentList(GDM.getAssignments());
-        this.failedAssignments = new AssignmentList(new List<Card>());
+        this.failedAssignments = new AssignmentList(new List<AssignmentCard>());
 
         // Stats
         this.stamina = 100;
@@ -83,9 +88,9 @@ public class Player : MonoBehaviour
     }
 
     // Draw card from assignments
-    public Card drawCard() {
+    public AssignmentCard drawCard() {
         //successRate = 0;
-        Card assignment = assignments.NextAssignment();
+        AssignmentCard assignment = assignments.NextAssignment();
         if (assignment == null) {
             assignment = failedAssignments.NextAssignment();
         }
@@ -96,7 +101,7 @@ public class Player : MonoBehaviour
         //FE.showAssignmentOptions();
     }
 
-    public Card getLastAssignment() {
+    public AssignmentCard getLastAssignment() {
         return this.lastAssignment;
     }
 

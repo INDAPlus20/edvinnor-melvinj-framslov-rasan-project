@@ -20,7 +20,16 @@ public class TurnManager : MonoBehaviour
     {
         // Get GDM reference by name
         GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-        StartCoroutine(GameLoop());
+    }
+
+    private bool first = true;
+
+    void Update() {
+        if (first) 
+        {
+            first = false;
+            StartCoroutine(GameLoop());
+        }
     }
 
     // Used by buttons?
@@ -34,7 +43,7 @@ public class TurnManager : MonoBehaviour
         while (true)
         {
             // Draw new card from active player
-            GDM.getActivePlayer.drawCard();
+            GDM.getActivePlayer().drawCard();
 
             // Display Assignment card
             yield return WaitForInput();
@@ -75,7 +84,7 @@ public class TurnManager : MonoBehaviour
                 yield return WaitForInput();
                 if (choice == "yes") 
                 {
-                    GDM.getActivePlayer().tempGetAssignment().play();
+                    GDM.getActivePlayer().getLastAssignment().play();
                 }
                 else if (choice == "no")
                 {

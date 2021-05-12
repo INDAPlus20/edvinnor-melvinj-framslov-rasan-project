@@ -947,8 +947,6 @@ MonoBehaviour:
   turn: 0
   hp: 0
   stamina: 0
-  card: {fileID: 11400000, guid: db63357c11691ce4bab782154637102a, type: 2}
-  assignment: {fileID: 0}
 --- !u!1 &1115070995
 GameObject:
   m_ObjectHideFlags: 0
