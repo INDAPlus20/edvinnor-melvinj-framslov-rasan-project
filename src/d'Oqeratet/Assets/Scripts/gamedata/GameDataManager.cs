@@ -34,14 +34,14 @@ struct Board
         this.activePlayerIndex = 0;
 
         int hpSum = 0;
-        Assignments = new List<Card>();
+        Assignments = new List<AssignmentCard>();
 
         //Generate more assignments until we have an entire deck surpassing the graduation goal
         while(hpSum < this.hpTarget) 
         {
-            Card newCard = ScriptableObject.CreateInstance<Card>();
+            AssignmentCard newCard = ScriptableObject.CreateInstance<AssignmentCard>();
             Assignments.Add(newCard);
-            hpSum += newCard.hpGain;
+            hpSum += newCard.hp;
         }
     }
 }
@@ -99,7 +99,7 @@ public class GameDataManager : MonoBehaviour
     {
         //@Edvin
         Debug.Log("NOT IN USE");
-        return ScriptableObject.CreateInstance</*Chapter*/Card>();
+        return ScriptableObject.CreateInstance</*Chapter*/AssignmentCard>();
     }
 
     //Returns an array of player hp-s

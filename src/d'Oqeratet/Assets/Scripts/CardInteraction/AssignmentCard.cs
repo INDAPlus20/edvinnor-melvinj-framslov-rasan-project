@@ -48,6 +48,6 @@ public class AssignmentCard : ScriptableObject
     public void play(){ 
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         gdm.getActivePlayer().addStamina(stamina);
-        gdm.getActivePlayer().addHp(hp);
+        gdm.getActivePlayer().addHP(hp);
     }
 }
