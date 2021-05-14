@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Assignment Card", menuName = "Assignment")]
+[Serializable]
 public class AssignmentCard : ScriptableObject
 {
     public Sprite artwork;
@@ -17,8 +19,8 @@ public class AssignmentCard : ScriptableObject
     {
         if (true)
         {
-            stamina = Random.Range(-40, -20);
-            hp = Random.Range(18, 12);
+            stamina = UnityEngine.Random.Range(-40, -20);
+            hp = UnityEngine.Random.Range(18, 12);
         }
     }
 
@@ -27,8 +29,8 @@ public class AssignmentCard : ScriptableObject
         name = "Card";
         description = "description";
         if (rand){
-            stamina = Random.Range(-40, -20);
-            hp = Random.Range(18, 12);
+            stamina = UnityEngine.Random.Range(-40, -20);
+            hp = UnityEngine.Random.Range(18, 12);
         }
         else{
             hp = 14;
@@ -58,5 +60,10 @@ public class AssignmentCard : ScriptableObject
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         gdm.getActivePlayer().addStamina(stamina);
         gdm.getActivePlayer().addHP(hp);
+    }
+
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this);
     }
 }

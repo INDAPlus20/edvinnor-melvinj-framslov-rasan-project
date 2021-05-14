@@ -10,7 +10,7 @@ struct Board
     public int activePlayerIndex; //Index of player currently having their turn
     public List<AssignmentCard> Assignments; //List of all mandatory assignments
 
-    public Board(int numPlayers, int hpTarget, Player[] temp_input_ps)
+    public Board(int numPlayers, int hpTarget, Player[] temp_input_ps, List<AssignmentCard> assignments)
     {
         Debug.Log("Creating Board Struct");
         //Logs in order to find duplicate constructions
@@ -35,15 +35,7 @@ struct Board
         this.activePlayerIndex = 0;
 
         int hpSum = 0;
-        Assignments = new List<AssignmentCard>();
-
-        //Generate more assignments until we have an entire deck surpassing the graduation goal
-        while(hpSum < this.hpTarget) 
-        {
-            AssignmentCard newCard = ScriptableObject.CreateInstance<AssignmentCard>();
-            Assignments.Add(newCard);
-            hpSum += newCard.hp;
-        }
+        Assignments = assignments;
     }
 }
 
@@ -67,13 +59,12 @@ public class GameDataManager : MonoBehaviour
 
         rng = new System.Random();
 
-        string path = @"Assets/Scripts/CardInteraction/Assignments.json";
-        AssignmentCardLoader unused = new AssignmentCardLoader(path);
+        string path = @"Assets/Jsons/Assignments.json";
 
         Player[] temp_input_ps = new Player[] {temp_p1, temp_p2, temp_p3, temp_p4};
         this.num_players = 4;
 
-        board = new Board(this.num_players, 300, temp_input_ps);
+        board = new Board(this.num_players, 300, temp_input_ps, AssignmentCardLoader.ReadAssignments(path));
     }
 
     //Set the index of the player currently having their turn
@@ -159,12 +150,7 @@ public class GameDataManager : MonoBehaviour
     }
 
     public void Shuffle<T>(List<T> list)  
-    {  
-        if (list == null) {
-            Debug.Log("Null here?");
-        }
-        Debug.Log("hello?");
-
+    {
         int n = list.Count;  
         while (n > 1) {  
             n--;  

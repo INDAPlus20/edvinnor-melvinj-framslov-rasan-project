@@ -6,24 +6,33 @@ using UnityEngine;
 
 public class AssignmentCardLoader
 {
-    private List<AssignmentCard> all_assignments; 
-
-    public AssignmentCardLoader (string path) 
+    public static void Write15RandomAssignments (string path) 
     {
-        all_assignments = new List<AssignmentCard>();
-
         if (!File.Exists(path))
         {
             // Create a file to write to.
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.WriteLine("This");
-                sw.WriteLine("Is");
-                sw.WriteLine("Supposed");
-                sw.WriteLine("To");
-                sw.WriteLine("Be");
-                sw.WriteLine("An");
-                sw.WriteLine("Assignment");
+                for (int i = 0; i < 15; i++) {
+                    AssignmentCard card = ScriptableObject.CreateInstance<AssignmentCard>();
+                    string json = card.ToJson();
+                    sw.WriteLine(json);
+                }
+            }
+        }
+    }
+
+    public static List<AssignmentCard> ReadAssignments (string path) {
+        if (!File.Exists(path))
+        {
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i < 15; i++) {
+                    AssignmentCard card = ScriptableObject.CreateInstance<AssignmentCard>();
+                    string json = card.ToJson();
+                    sw.WriteLine(json);
+                }
             }
         }
 
@@ -31,11 +40,14 @@ public class AssignmentCardLoader
         using (StreamReader sr = File.OpenText(path))
         {
             string s;
+            List<AssignmentCard> assignments = new List<AssignmentCard>();
             while ((s = sr.ReadLine()) != null)
             {
-                Debug.Log(s);
+                AssignmentCard readcard = ScriptableObject.CreateInstance<AssignmentCard>();
+                JsonUtility.FromJsonOverwrite(s, readcard);
+                assignments.Add(readcard);
             }
+            return assignments;
         }
-
     }
 }
