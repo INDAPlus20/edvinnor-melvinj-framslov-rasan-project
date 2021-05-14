@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 struct Board
 {
@@ -48,6 +49,7 @@ struct Board
 
 public class GameDataManager : MonoBehaviour
 {
+    private System.Random rng;
 
     //Added through unity GUI
     public Player temp_p1;
@@ -62,6 +64,8 @@ public class GameDataManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Starting GDM");
+
+        rng = new System.Random();
 
         string path = @"Assets/Scripts/CardInteraction/Assignments.json";
         AssignmentCardLoader unused = new AssignmentCardLoader(path);
@@ -93,7 +97,21 @@ public class GameDataManager : MonoBehaviour
     //Returns the global list of assignments
     public List<AssignmentCard> getAssignments() 
     {
-        return board.Assignments;
+        if (board.Assignments == null) {
+            Debug.Log("Assignments null when getting assignments");
+        }
+        try 
+        {
+            List<AssignmentCard> tempassignments;
+            
+            //Deep Copy Magic
+            tempassignments = board.Assignments.ConvertAll(c => ScriptableObject.CreateInstance<AssignmentCard>().InitAndReturnSelf(c.artwork, c.stamina, c.hp, c.name, c.description));
+            Shuffle(tempassignments);
+            return tempassignments;
+        }
+        catch (NullReferenceException) {
+            return null;
+        }
     }
 
     //In future:
@@ -138,6 +156,23 @@ public class GameDataManager : MonoBehaviour
     public void testReference(string reference) 
     {
         Debug.Log("Reference " + reference + " to GDM ok");
+    }
+
+    public void Shuffle<T>(List<T> list)  
+    {  
+        if (list == null) {
+            Debug.Log("Null here?");
+        }
+        Debug.Log("hello?");
+
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            int k = rng.Next(n + 1);  
+            T value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
     }
 
 }

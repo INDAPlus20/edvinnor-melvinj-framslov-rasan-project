@@ -36,6 +36,15 @@ public class AssignmentCard : ScriptableObject
         }
     }
 
+    public AssignmentCard InitAndReturnSelf(Sprite artwork, int stamina, int hp, string name, string description) {
+        this.artwork = artwork;
+        this.stamina = stamina;
+        this.hp = hp;
+        this.name = name;
+        this.description = description;
+        return this;
+    }
+
     public AssignmentCard(Sprite artwork, int stamina, int hp, string name, string description){
         Debug.Log("card created");
         this.artwork = artwork;
