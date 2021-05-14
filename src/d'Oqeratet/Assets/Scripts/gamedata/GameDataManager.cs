@@ -63,6 +63,9 @@ public class GameDataManager : MonoBehaviour
     {
         Debug.Log("Starting GDM");
 
+        string path = @"Assets/Scripts/CardInteraction/Assignments.json";
+        AssignmentCardLoader unused = new AssignmentCardLoader(path);
+
         Player[] temp_input_ps = new Player[] {temp_p1, temp_p2, temp_p3, temp_p4};
         this.num_players = 4;
 
