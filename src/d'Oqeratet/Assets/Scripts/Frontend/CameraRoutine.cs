@@ -7,7 +7,7 @@ public class CameraRoutine : MonoBehaviour
     private GameDataManager GDM;
     private int target;
     private int prevTarget;
-    private int speed = 50;
+    private int speed = 200;
     private float yrot;
 
     void Start() {
