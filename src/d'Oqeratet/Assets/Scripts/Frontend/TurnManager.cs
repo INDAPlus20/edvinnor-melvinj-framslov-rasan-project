@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     // Script references
-    GameDataManager GDM;
+    private GameDataManager GDM;
 
     // Counters
     public int round = 0;
@@ -18,18 +18,9 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
-        // Get GDM reference by name
+        // Get GDM reference by name and start loop coroutine
         GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-    }
-
-    private bool first = true;
-
-    void Update() {
-        if (first) 
-        {
-            first = false;
-            StartCoroutine(GameLoop());
-        }
+        StartCoroutine(GameLoop());
     }
 
     // Used by buttons?
