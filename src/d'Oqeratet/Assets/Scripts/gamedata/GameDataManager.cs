@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 struct Board
 {
@@ -9,7 +10,7 @@ struct Board
     public int activePlayerIndex; //Index of player currently having their turn
     public List<AssignmentCard> Assignments; //List of all mandatory assignments
 
-    public Board(int numPlayers, int hpTarget, Player[] temp_input_ps)
+    public Board(int numPlayers, int hpTarget, Player[] temp_input_ps, List<AssignmentCard> assignments)
     {
         Debug.Log("Creating Board Struct");
         //Logs in order to find duplicate constructions
@@ -34,20 +35,13 @@ struct Board
         this.activePlayerIndex = 0;
 
         int hpSum = 0;
-        Assignments = new List<AssignmentCard>();
-
-        //Generate more assignments until we have an entire deck surpassing the graduation goal
-        while(hpSum < this.hpTarget) 
-        {
-            AssignmentCard newCard = ScriptableObject.CreateInstance<AssignmentCard>();
-            Assignments.Add(newCard);
-            hpSum += newCard.hp;
-        }
+        Assignments = assignments;
     }
 }
 
 public class GameDataManager : MonoBehaviour
 {
+    private System.Random rng;
 
     //Added through unity GUI
     public Player temp_p1;
@@ -64,11 +58,14 @@ public class GameDataManager : MonoBehaviour
     {
         Debug.Log("Starting GDM");
 
+        rng = new System.Random();
+
+        string path = @"Assets/Jsons/Assignments.json";
+
         Player[] temp_input_ps = new Player[] {temp_p1, temp_p2, temp_p3, temp_p4};
         this.num_players = 4;
 
-        board = new Board(this.num_players, 300, temp_input_ps);
-
+        board = new Board(this.num_players, 300, temp_input_ps, AssignmentCardLoader.ReadAssignments(path));
         tm.SetActive(true);
     }
 
@@ -93,7 +90,21 @@ public class GameDataManager : MonoBehaviour
     //Returns the global list of assignments
     public List<AssignmentCard> getAssignments() 
     {
-        return board.Assignments;
+        if (board.Assignments == null) {
+            Debug.Log("Assignments null when getting assignments");
+        }
+        try 
+        {
+            List<AssignmentCard> tempassignments;
+            
+            //Deep Copy Magic
+            tempassignments = board.Assignments.ConvertAll(c => ScriptableObject.CreateInstance<AssignmentCard>().InitAndReturnSelf(c.artwork, c.stamina, c.hp, c.name, c.description));
+            Shuffle(tempassignments);
+            return tempassignments;
+        }
+        catch (NullReferenceException) {
+            return null;
+        }
     }
 
     //In future:
@@ -138,6 +149,18 @@ public class GameDataManager : MonoBehaviour
     public void testReference(string reference) 
     {
         Debug.Log("Reference " + reference + " to GDM ok");
+    }
+
+    public void Shuffle<T>(List<T> list)  
+    {
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            int k = rng.Next(n + 1);  
+            T value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
     }
 
 }

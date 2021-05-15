@@ -15,6 +15,7 @@ struct AssignmentList
     public AssignmentCard NextAssignment() {
         if (assignments == null) {
             GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+            // Returns a shuffled deep copy of all assignments
             assignments = gdm.getAssignments();
             index = -1;
         }
@@ -57,8 +58,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-        // Returns a deep copy of all assignments
-        this.assignments = new AssignmentList(GDM.getAssignments());
         this.failedAssignments = new AssignmentList(new List<AssignmentCard>());
 
         // Stats
