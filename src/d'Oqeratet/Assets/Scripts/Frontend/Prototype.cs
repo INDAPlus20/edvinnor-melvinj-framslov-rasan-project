@@ -9,7 +9,7 @@ public class Prototype : MonoBehaviour
     private int assignment_hp;
     private int assignment_stamina;
 
-    private TurnManager tm;
+    public TurnManager tm;
     private GameDataManager gdm;
     private AssignmentCard card;
 
@@ -27,7 +27,7 @@ public class Prototype : MonoBehaviour
 
     void Start() {
         gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
-        tm = GameObject.Find("Stage Hand").GetComponent<TurnManager>();
+        //tm = GameObject.Find("Stage Hand").GetComponent<TurnManager>();
     }
 
     void Update()
@@ -36,8 +36,8 @@ public class Prototype : MonoBehaviour
         players_hp = gdm.getAllHps();
         players_stamina = gdm.getAllStaminas();
         card = gdm.getActivePlayer().getLastAssignment();
-        current_round = tm.round;
         current_turn = gdm.getTurnIndex();
+        current_round = current_turn / 4;
         current_turn++;
 
         assignment_hp = card.hp;

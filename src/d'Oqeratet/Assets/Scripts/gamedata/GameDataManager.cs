@@ -48,6 +48,7 @@ public class GameDataManager : MonoBehaviour
     public Player temp_p2;
     public Player temp_p3;
     public Player temp_p4;
+    public GameObject tm;
 
     private Board board;
     private int num_players;
@@ -65,6 +66,7 @@ public class GameDataManager : MonoBehaviour
         this.num_players = 4;
 
         board = new Board(this.num_players, 300, temp_input_ps, AssignmentCardLoader.ReadAssignments(path));
+        tm.SetActive(true);
     }
 
     //Set the index of the player currently having their turn
