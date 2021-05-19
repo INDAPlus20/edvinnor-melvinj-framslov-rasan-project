@@ -23,12 +23,29 @@ public class ChapterCard : ScriptableObject
         this.stamina = stamina;
         this.money = money;
     }
-    //provide the player index's in the order of the stat arrays
+    //provide the player id's in the order of the stat arrays
     public void play(int[] players){ 
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         for (int i = 0; i < players.Length; i++){
             gdm.getPlayerFromIndex(players[i]).addStamina(stamina[i]);
             gdm.getPlayerFromIndex(players[i]).addMoney(money[i]);
         }
+    }
+
+    public bool isPlayable(){
+        GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        
+        for (int i = 0; i < players.Length; i++){
+            gdm.getPlayerFromIndex(players[i]);
+            
+            newStamina = player.stamina + stamina;
+            newMoney = player.money + money;
+            
+            if( newStamina < 0 || player.maxStamina < newStamina
+            || newMoney < 0){
+                return false;    
+            }
+        }
+        return true;
     }
 }
