@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardDisplay : MonoBehaviour
+public class AssignmentCardDisplay : MonoBehaviour
 {
     public AssignmentCard card;
     public Text nameText;
