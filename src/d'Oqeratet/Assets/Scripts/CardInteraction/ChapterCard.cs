@@ -38,8 +38,8 @@ public class ChapterCard : ScriptableObject
         for (int i = 0; i < players.Length; i++){
             gdm.getPlayerFromIndex(players[i]);
             
-            newStamina = player.stamina + stamina;
-            newMoney = player.money + money;
+            newStamina = player.stamina + stamina[i];
+            newMoney = player.money + money[i];
             
             if( newStamina < 0 || player.maxStamina < newStamina
             || newMoney < 0){
