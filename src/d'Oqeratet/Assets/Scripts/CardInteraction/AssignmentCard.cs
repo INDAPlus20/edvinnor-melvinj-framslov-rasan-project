@@ -62,6 +62,14 @@ public class AssignmentCard : ScriptableObject
         gdm.getActivePlayer().addHP(hp);
     }
 
+    public bool isPlayable(){
+        GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        var player = gdm.getActivePlayer();
+        newStamina = player.stamina + stamina;
+        newHp = player.hp + hp;
+        return !(newStamina < 0) && !(player.maxStamina < newStamina);
+    }
+
     public string ToJson()
     {
         return JsonUtility.ToJson(this);
