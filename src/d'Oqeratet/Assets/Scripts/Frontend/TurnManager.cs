@@ -34,12 +34,13 @@ public class TurnManager : MonoBehaviour
         while (true)
         {
             // Draw new card from active player
-            GDM.drawPlayerCard();
+            Player player = GDM.getActivePlayer();
+            AssignmentCard card = GDM.drawPlayerCard();
             
             yield return WaitForInput();
 
             // Execute choice
-            if (choice == "yes")
+            if (choice == "yes" && player.stamina >= 5)
             {
                 // Prepare for assignment selected
                 choice = "none";
@@ -72,7 +73,7 @@ public class TurnManager : MonoBehaviour
 
                 // Display Attempt Assignment Option
                 yield return WaitForInput();
-                if (choice == "yes") 
+                if (choice == "yes" && card.isPlayable())
                 {
                     bool finished = GDM.getActivePlayer().getLastAssignment().play();
                     
