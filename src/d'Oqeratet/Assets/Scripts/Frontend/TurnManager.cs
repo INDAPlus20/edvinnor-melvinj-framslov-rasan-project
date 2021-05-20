@@ -32,8 +32,8 @@ public class TurnManager : MonoBehaviour
 
         while (true)
         {
-            //Get active player from GDM
-            Player active_player = GDM.getActivePlayer();
+            // Draw new card from active player
+            GDM.drawPlayerCard();
 
             //Get active player's assignment card
             //Causes issues since there currently (05-11) is no Card prefab
