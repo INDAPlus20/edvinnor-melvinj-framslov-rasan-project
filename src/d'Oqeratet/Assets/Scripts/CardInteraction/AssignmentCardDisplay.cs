@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardDisplay : MonoBehaviour
+public class AssignmentCardDisplay : MonoBehaviour
 {
-    public Card card;
+    public AssignmentCard card;
     public Text nameText;
     public Text descriptionText;
     public Image artworkImage;
