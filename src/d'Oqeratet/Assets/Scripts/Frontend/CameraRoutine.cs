@@ -50,5 +50,6 @@ public class CameraRoutine : MonoBehaviour
                 yield return null;
             }
         }
+        transform.localEulerAngles = new Vector3(0.0f, target, 0.0f);
     }
 }
