@@ -65,8 +65,8 @@ public class AssignmentCard : ScriptableObject
     public bool isPlayable(){
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         var player = gdm.getActivePlayer();
-        newStamina = player.stamina + stamina;
-        newHp = player.hp + hp;
+        int newStamina = player.stamina + stamina;
+        int newHp = player.hp + hp;
         return !(newStamina < 0) && !(player.maxStamina < newStamina);
     }
 

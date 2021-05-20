@@ -32,14 +32,16 @@ public class ChapterCard : ScriptableObject
         }
     }
 
-    public bool isPlayable(){
+    public bool isPlayable(int[] players){
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+
+        var player = gdm.getActivePlayer();
         
         for (int i = 0; i < players.Length; i++){
             gdm.getPlayerFromIndex(players[i]);
             
-            newStamina = player.stamina + stamina[i];
-            newMoney = player.money + money[i];
+            int newStamina = player.stamina + stamina[i];
+            int newMoney = player.money + money[i];
             
             if( newStamina < 0 || player.maxStamina < newStamina
             || newMoney < 0){
