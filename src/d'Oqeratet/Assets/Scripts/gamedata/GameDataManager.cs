@@ -19,7 +19,7 @@ struct Board
 
         int hpSum = 0;
 
-        foreach (AssignmentCard ac in Assignments)
+        foreach (AssignmentCard ac in assignments)
         {
             hpSum += ac.hp;
         }
