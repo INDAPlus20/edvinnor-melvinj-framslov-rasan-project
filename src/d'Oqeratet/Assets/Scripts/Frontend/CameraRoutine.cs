@@ -44,8 +44,8 @@ public class CameraRoutine : MonoBehaviour
             }
             else {
                 transform.localEulerAngles += new Vector3(0.0f, speed * Time.deltaTime, 0.0f);
-                print(yrot + speed * Time.deltaTime);
-                print(target);
+                //print(yrot + speed * Time.deltaTime);
+                //print(target);
 
                 yield return null;
             }

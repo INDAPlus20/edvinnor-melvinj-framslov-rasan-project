@@ -4,7 +4,7 @@ using UnityEngine;
 
 struct AssignmentList
 {
-    private List<AssignmentCard> assignments;
+    private List<AssignmentCard> assignments;//Private deck of assignments
     private int index;
 
     public AssignmentList(List<AssignmentCard> assignments) {
@@ -14,6 +14,7 @@ struct AssignmentList
 
     public AssignmentCard NextAssignment() {
         if (assignments == null) {
+            //Since this is run from after all the start-methods, GDM will have been initialised
             GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
             // Returns a shuffled deep copy of all assignments
             assignments = gdm.getAssignments();
@@ -36,14 +37,12 @@ public class Player : MonoBehaviour
 {
     // Script references
     GameDataManager GDM;
-    //FrontEnd FE;
 
-    // Assignements
+    // Assignments
     AssignmentList assignments;
     AssignmentList failedAssignments;
-    //Card assignment;
 
-    int successRate;
+    int successProbability;
 
     // Stats
     public int stamina;
@@ -55,9 +54,10 @@ public class Player : MonoBehaviour
 
     // Items
 
-    // Start is called before the first frame update
+    //Friends
+
     void Start() {
-        GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
+        //GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         this.failedAssignments = new AssignmentList(new List<AssignmentCard>());
 
         // Stats
@@ -88,20 +88,26 @@ public class Player : MonoBehaviour
 
     // Draw card from assignments
     public AssignmentCard drawCard() {
-        //successRate = 0;
+        //successProbability = 0;
         AssignmentCard assignment = assignments.NextAssignment();
         if (assignment == null) {
+            //No more assignments left
+            //Attempt to take one from failed assignment deck
             assignment = failedAssignments.NextAssignment();
         }
 
         this.lastAssignment = assignment;   
 
         return assignment;
-        //FE.showAssignmentOptions();
     }
 
     public AssignmentCard getLastAssignment() {
         return this.lastAssignment;
+    }
+
+    public void failAssignment(AssignmentCard failedAssignment) 
+    {
+        this.failedAssignments.InsertAssignment(failedAssignment);
     }
 
     // Work or relax
@@ -116,8 +122,6 @@ public class Player : MonoBehaviour
         } else {
             addStamina(10);
         }
-
-        //FE.endTurn();
     }
 
     // Accept assignment
@@ -134,7 +138,7 @@ public class Player : MonoBehaviour
     // Study for assignment
     void study() {
         addStamina(-5);
-        successRate += 5;
+        successProbability += 5;
     }
 
     // Attempt assignment

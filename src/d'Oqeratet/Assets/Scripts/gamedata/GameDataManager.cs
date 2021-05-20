@@ -5,36 +5,29 @@ using System;
 
 struct Board
 {
-    public int hpTarget; //Graduation goal
+    private int hpTarget; //Graduation goal
+    public int getHpTarget() {return hpTarget;}
+
     public Player[] ps; //players
     public int activePlayerIndex; //Index of player currently having their turn
     public List<AssignmentCard> Assignments; //List of all mandatory assignments
 
     public Board(int numPlayers, int hpTarget, Player[] temp_input_ps, List<AssignmentCard> assignments)
     {
-        Debug.Log("Creating Board Struct");
-        //Logs in order to find duplicate constructions
-
-
-        /*
-        Until player-prefabbing figured out this is commented out
-        Player[] tempPlayers = new Player[numPlayers];
-
-        for(int i = 0; i < numPlayers; i++) {
-            tempPlayers[i] = GameObject.Find("Player " + (i+1)).GetComponent<Player>();
-        }
-        this.ps = tempPlayers;
-        */
-
-        //Until Player-prefabbing figured out
-        this.ps = temp_input_ps;
-
-
-
-        this.hpTarget = hpTarget;
-        this.activePlayerIndex = 0;
+        //Debug.Log("Creating Board Struct");
+        //Log in order to find duplicate constructions
 
         int hpSum = 0;
+
+        foreach (AssignmentCard ac in assignments)
+        {
+            hpSum += ac.hp;
+        }
+
+        this.ps = temp_input_ps;
+        this.hpTarget = hpSum;
+        this.activePlayerIndex = 0;
+
         Assignments = assignments;
     }
 }
@@ -109,11 +102,16 @@ public class GameDataManager : MonoBehaviour
 
     //In future:
     //Will return the next chapter card from the global deck
-    public AssignmentCard drawChapterCard() 
+    public ChapterCard drawChapterCard() 
     {
         //@Edvin
         Debug.Log("NOT IN USE");
-        return ScriptableObject.CreateInstance</*Chapter*/AssignmentCard>();
+        return ScriptableObject.CreateInstance<ChapterCard>();
+    }
+
+    public int getHpTarget() 
+    {
+        return board.getHpTarget();
     }
 
     //Returns an array of player hp-s
@@ -134,6 +132,17 @@ public class GameDataManager : MonoBehaviour
         for (int i = 0; i < this.num_players; i++) 
         {
             to_return[i] = getPlayerFromIndex(i).stamina;
+        }
+        return to_return;
+    }
+
+    //Returns an array of player balances
+    public int[] getAllBalances() 
+    {
+        int[] to_return = new int[this.num_players];
+        for (int i = 0; i < this.num_players; i++) 
+        {
+            to_return[i] = getPlayerFromIndex(i).money;
         }
         return to_return;
     }
