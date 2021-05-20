@@ -5,12 +5,8 @@ using System;
 
 [CreateAssetMenu(fileName = "New Assignment Card", menuName = "Assignment")]
 [Serializable]
-public class AssignmentCard : ScriptableObject
+public class AssignmentCard : Card
 {
-    public Sprite artwork;
-    public new string name;
-    public string description;
-
     //Give negative values for lossing stats
     public int stamina;
     public int hp;
@@ -56,7 +52,7 @@ public class AssignmentCard : ScriptableObject
         this.description = description;
     }
 
-    public bool play(){ 
+    public override bool play(int[] players = null){ 
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         gdm.getActivePlayer().addStamina(stamina);
         gdm.getActivePlayer().addHP(hp);
@@ -65,7 +61,7 @@ public class AssignmentCard : ScriptableObject
         return gdm.getHpTarget() <= gdm.getActivePlayer().hp;
     }
 
-    public bool isPlayable(){
+    public override bool isPlayable(int[] players = null){
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         var player = gdm.getActivePlayer();
         int newStamina = player.stamina + stamina;
