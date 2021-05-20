@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Chapter Card", menuName = "Chapter")]
+[Serializable]
 public class ChapterCard : ScriptableObject
 {
     public Sprite artwork;
@@ -49,5 +51,10 @@ public class ChapterCard : ScriptableObject
             }
         }
         return true;
+    }
+
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this);
     }
 }
