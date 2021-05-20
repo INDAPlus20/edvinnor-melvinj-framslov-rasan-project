@@ -45,7 +45,9 @@ public class GameDataManager : MonoBehaviour
 
     private Board board;
     private int num_players;
-    
+
+    private GameObject cardPreFab;
+    private GameObject cameraMount;
 
     void Start()
     {
@@ -59,6 +61,11 @@ public class GameDataManager : MonoBehaviour
         this.num_players = 4;
 
         board = new Board(this.num_players, 300, temp_input_ps, JsonCardListLoader.ReadPathToAssignmentCardList(path));
+        tm.SetActive(true);
+
+        cardPreFab = Resources.Load<GameObject>("Prefabs/Test Card Disp");
+        cameraMount = GameObject.Find("Camera Mount");
+        
         tm.SetActive(true);
     }
 
@@ -102,6 +109,41 @@ public class GameDataManager : MonoBehaviour
 
     //In future:
     //Will return the next chapter card from the global deck
+
+    //In future:
+    //Will Create a GameObject from players AssignmentCard
+    public AssignmentCard drawPlayerCard() 
+    {
+        Player player = getActivePlayer();
+        AssignmentCard assignment = player.drawCard();
+        Transform playerCard = player.transform.Find("Test Card Disp(Clone)");
+
+        // If no playerCard is found, Create GameObject
+        if (playerCard == null) 
+        {
+            Vector3 pos = new Vector3(0, 1.35f, 0); // Temp
+            playerCard = Instantiate<GameObject>(cardPreFab, pos, cameraMount.transform.rotation * Quaternion.Euler(0, 0, 90)).transform;
+            playerCard.parent = player.transform;
+        }
+
+        // Get text-fields
+        Transform canvas = playerCard.transform.Find("Canvas");
+        Transform title = canvas.transform.Find("Title");
+        Transform sa = canvas.transform.Find("Splash Art");
+        Transform ft = canvas.transform.Find("Flavour Text");
+        Transform hp = canvas.transform.Find("HP");
+        Transform stamina = canvas.transform.Find("Stamina");
+
+        // Update text-fields
+        title.GetComponent<TMPro.TextMeshProUGUI>().text = assignment.name;
+        //sa.GetComponent<Image>().SourceImage = assignment.artwork; // Uncertain of this one
+        ft.GetComponent<TMPro.TextMeshProUGUI>().text = assignment.description;
+        hp.GetComponent<TMPro.TextMeshProUGUI>().text = assignment.hp.ToString();
+        stamina.GetComponent<TMPro.TextMeshProUGUI>().text = Mathf.Abs(assignment.stamina).ToString();
+
+        return assignment;
+    }
+
     public ChapterCard drawChapterCard() 
     {
         //@Edvin
@@ -171,5 +213,4 @@ public class GameDataManager : MonoBehaviour
             list[n] = value;  
         }  
     }
-
 }

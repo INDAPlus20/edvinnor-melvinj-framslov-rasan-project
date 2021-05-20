@@ -34,9 +34,8 @@ public class TurnManager : MonoBehaviour
         while (true)
         {
             // Draw new card from active player
-            GDM.getActivePlayer().drawCard();
-
-            // Display Assignment card
+            GDM.drawPlayerCard();
+            
             yield return WaitForInput();
 
             // Execute choice
