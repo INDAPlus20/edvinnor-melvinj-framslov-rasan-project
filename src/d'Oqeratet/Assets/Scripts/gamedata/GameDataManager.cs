@@ -17,8 +17,15 @@ struct Board
         //Debug.Log("Creating Board Struct");
         //Log in order to find duplicate constructions
 
+        int hpSum = 0;
+
+        foreach (AssignmentCard ac in Assignments)
+        {
+            hpSum += ac.hp;
+        }
+
         this.ps = temp_input_ps;
-        this.hpTarget = hpTarget;
+        this.hpTarget = hpSum;
         this.activePlayerIndex = 0;
 
         Assignments = assignments;
