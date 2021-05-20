@@ -58,7 +58,7 @@ public class GameDataManager : MonoBehaviour
         Player[] temp_input_ps = new Player[] {temp_p1, temp_p2, temp_p3, temp_p4};
         this.num_players = 4;
 
-        board = new Board(this.num_players, 300, temp_input_ps, AssignmentCardLoader.ReadAssignments(path));
+        board = new Board(this.num_players, 300, temp_input_ps, JsonCardListLoader.ReadPathToAssignmentCardList(path));
         tm.SetActive(true);
     }
 
