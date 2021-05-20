@@ -109,7 +109,7 @@ public class GameDataManager : MonoBehaviour
         return ScriptableObject.CreateInstance<ChapterCard>();
     }
 
-    public int getHpLimit() 
+    public int getHpTarget() 
     {
         return board.getHpTarget();
     }

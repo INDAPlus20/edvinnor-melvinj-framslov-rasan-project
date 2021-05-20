@@ -56,10 +56,13 @@ public class AssignmentCard : ScriptableObject
         this.description = description;
     }
 
-    public void play(){ 
+    public bool play(){ 
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         gdm.getActivePlayer().addStamina(stamina);
         gdm.getActivePlayer().addHP(hp);
+
+        //Returns true if the HP target is reached
+        return gdm.getHpTarget() <= gdm.getActivePlayer().hp;
     }
 
     public bool isPlayable(){

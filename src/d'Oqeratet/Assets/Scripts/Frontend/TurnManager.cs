@@ -75,7 +75,12 @@ public class TurnManager : MonoBehaviour
                 yield return WaitForInput();
                 if (choice == "yes") 
                 {
-                    GDM.getActivePlayer().getLastAssignment().play();
+                    bool finished = GDM.getActivePlayer().getLastAssignment().play();
+                    
+                    if (finished) 
+                    {
+                        Debug.Log("Player finished!");
+                    }
                 }
                 else if (choice == "no")
                 {
