@@ -36,7 +36,7 @@ struct AssignmentList
 public class Player : MonoBehaviour
 {
     // Script references
-    GameDataManager GDM;
+    public GameDataManager GDM;
 
     // Assignments
     AssignmentList assignments;
@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
     //Friends
 
     void Start() {
-        //GameDataManager GDM = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         this.failedAssignments = new AssignmentList(new List<AssignmentCard>());
 
         // Stats
@@ -164,6 +163,17 @@ public class Player : MonoBehaviour
     }*/
 
     void Update () {
-
+        Transform card = transform.Find("Test Card Disp(Clone)");
+        if (card != null)
+        {
+            if (this == GDM.getActivePlayer())
+            {
+                card.GetComponent<CardMovement>().desiredLocation = "face";
+            }
+            else
+            {
+                card.GetComponent<CardMovement>().desiredLocation = "draw_deck";
+            }
+        }
     }
 }

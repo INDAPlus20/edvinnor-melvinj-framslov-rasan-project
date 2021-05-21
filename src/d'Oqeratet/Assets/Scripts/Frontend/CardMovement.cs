@@ -43,7 +43,7 @@ public class CardMovement : MonoBehaviour
             case "face":
                 return (new Vector3(0.0f, 1.35f, 0.1f), new Vector3(0.0f, 0.0f, 90.0f));
             case "table":
-                return (new Vector3(-0.25f, 1.05f, 0.7f), new Vector3(270.0f, 270.0f, 0.0f));
+                return (new Vector3(-0.25f, 1.05f, 0.75f), new Vector3(270.0f, 270.0f, 0.0f));
             case "discard_deck":
                 return (new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 0.0f, 0.0f));
             default:

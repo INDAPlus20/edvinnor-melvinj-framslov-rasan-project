@@ -90,9 +90,11 @@ public class TurnManager : MonoBehaviour
             else if (choice == "no") 
             {
                 choice = "none";
+                GDM.getActivePlayer().addStamina(20);
+                GDM.getActivePlayer().failAssignment(card);
 
                 // Display Work or Relax -Option
-                yield return WaitForInput();
+                /*yield return WaitForInput();
                 if (choice == "work") 
                 {   
                     //GDM.activePlayer.addMoney(500);
@@ -101,7 +103,7 @@ public class TurnManager : MonoBehaviour
                 else if (choice == "relax") 
                 {
                     //GDM.activeplayer.addStamina(25);
-                }
+                }*/
             }
             choice = "none";
             
