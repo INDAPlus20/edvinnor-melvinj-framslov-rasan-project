@@ -5,12 +5,8 @@ using System;
 
 [CreateAssetMenu(fileName = "New Chapter Card", menuName = "Chapter")]
 [Serializable]
-public class ChapterCard : ScriptableObject
+public class ChapterCard : Card
 {
-    public Sprite artwork;
-    public new string name;
-    public string description;
-
     //Give negative values for lossing stats
     public int[] stamina;
     public int[] money;
@@ -26,15 +22,17 @@ public class ChapterCard : ScriptableObject
         this.money = money;
     }
     //provide the player id's in the order of the stat arrays
-    public void play(int[] players){ 
+    public override bool play(int[] players = null){ 
+        if(!isPlayable(players)) return false;
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
         for (int i = 0; i < players.Length; i++){
             gdm.getPlayerFromIndex(players[i]).addStamina(stamina[i]);
             gdm.getPlayerFromIndex(players[i]).addMoney(money[i]);
         }
+        return true;
     }
 
-    public bool isPlayable(int[] players){
+    public override bool isPlayable(int[] players = null){
         GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
 
         var player = gdm.getActivePlayer();
