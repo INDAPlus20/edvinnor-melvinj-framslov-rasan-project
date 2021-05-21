@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1825,6 +1825,7 @@ MonoBehaviour:
   temp_p3: {fileID: 322430244}
   temp_p4: {fileID: 1860337093}
   tm: {fileID: 1092172592}
+  cardPreFab: {fileID: 1948494649}
 --- !u!1 &1564112530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2720,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939269315}
   m_CullTransparentMesh: 1
+--- !u!1 &1948494649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2970465876335588552, guid: 5c6e17da398b0b647bc7a9d7496fe8be, type: 3}
+  m_PrefabInstance: {fileID: 2970465876160561364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1975540440
 GameObject:
   m_ObjectHideFlags: 0
