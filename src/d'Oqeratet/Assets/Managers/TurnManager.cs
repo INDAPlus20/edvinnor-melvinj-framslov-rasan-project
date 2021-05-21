@@ -76,6 +76,7 @@ public class TurnManager : MonoBehaviour
                 if (choice == "yes" && card.isPlayable())
                 {
                     bool finished = GDM.getActivePlayer().getLastAssignment().play();
+                    GDM.getActivePlayer().completeAssignment();
                     
                     if (finished) 
                     {

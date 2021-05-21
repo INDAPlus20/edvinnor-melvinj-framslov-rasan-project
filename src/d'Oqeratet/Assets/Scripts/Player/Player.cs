@@ -9,23 +9,27 @@ struct AssignmentList
 
     public AssignmentList(List<AssignmentCard> assignments) {
         this.assignments = assignments;
-        this.index = -1;
+        this.index = 0;
     }
 
-    public AssignmentCard NextAssignment() {
+    public AssignmentCard GetAssignment() {
         if (assignments == null) {
             //Since this is run from after all the start-methods, GDM will have been initialised
             GameDataManager gdm = GameObject.Find("Game Manager").GetComponent<GameDataManager>();
             // Returns a shuffled deep copy of all assignments
             assignments = gdm.getAssignments();
-            index = -1;
+            index = 0;
         }
-        index += 1;
         if (index < assignments.Count) {
             return assignments[index];
         }
         //Requesting out of range
         return null;
+    }
+
+    public void AdvanceAssignment() 
+    {
+        index += 1;
     }
 
     public void InsertAssignment(AssignmentCard newCard) {
@@ -88,11 +92,11 @@ public class Player : MonoBehaviour
     // Draw card from assignments
     public AssignmentCard drawCard() {
         //successProbability = 0;
-        AssignmentCard assignment = assignments.NextAssignment();
+        AssignmentCard assignment = assignments.GetAssignment();
         if (assignment == null) {
             //No more assignments left
             //Attempt to take one from failed assignment deck
-            assignment = failedAssignments.NextAssignment();
+            assignment = failedAssignments.GetAssignment();
         }
 
         this.lastAssignment = assignment;   
@@ -107,6 +111,11 @@ public class Player : MonoBehaviour
     public void failAssignment(AssignmentCard failedAssignment) 
     {
         this.failedAssignments.InsertAssignment(failedAssignment);
+    }
+
+    public void completeAssignment() 
+    {
+        this.assignments.AdvanceAssignment();
     }
 
     // Work or relax
@@ -164,6 +173,7 @@ public class Player : MonoBehaviour
 
     void Update () {
         Transform card = transform.Find("Test Card Disp(Clone)");
+        
         if (card != null)
         {
             if (this == GDM.getActivePlayer())
