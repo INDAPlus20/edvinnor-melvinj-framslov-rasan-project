@@ -46,7 +46,7 @@ public class GameDataManager : MonoBehaviour
     private Board board;
     private int num_players;
 
-    private GameObject cardPreFab;
+    public GameObject cardPreFab;
     private GameObject cameraMount;
 
     void Start()
@@ -63,7 +63,7 @@ public class GameDataManager : MonoBehaviour
         board = new Board(this.num_players, 300, temp_input_ps, JsonCardListLoader.ReadPathToAssignmentCardList(path));
         tm.SetActive(true);
 
-        cardPreFab = Resources.Load<GameObject>("Prefabs/Test Card Disp");
+        //cardPreFab = Resources.Load<GameObject>("Prefabs/Test Card Disp");
         cameraMount = GameObject.Find("Camera Mount");
         
         tm.SetActive(true);
